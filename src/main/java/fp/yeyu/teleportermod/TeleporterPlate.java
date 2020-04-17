@@ -1,5 +1,6 @@
 package fp.yeyu.teleportermod;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -13,6 +14,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -64,17 +66,17 @@ public class TeleporterPlate extends PressurePlateBlock{
             // tp strength of 12500 blocks
             Blocks.EMERALD_BLOCK
     };
-    private static final HashMap<Block, Integer> blockTeleportationStrength = new HashMap<>();
-    private static final HashMap<TeleportationStrengthLevel, Integer> teleportationStrengthLevel = new HashMap<>();
+    private static final HashMap<Block, List<Integer>> blockTeleportationStrength = new HashMap<>();
+    private static final HashMap<TeleportationStrengthLevel, List<Integer>> teleportationStrengthLevel = new HashMap<>();
 
     static {
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.BASIC, 3);
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.WOOD, 10);
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.LOG, 50);
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.IRON, 500);
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.GOLD, 2000);
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.DIAMOND, 5000);
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.EMERALD, 12500);
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.BASIC, Lists.newArrayList(2, 5));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.WOOD, Lists.newArrayList(10, 50));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.LOG, Lists.newArrayList(50, 100));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.IRON, Lists.newArrayList(100, 500));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.GOLD, Lists.newArrayList(500, 2000));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.DIAMOND, Lists.newArrayList(2000, 5000));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.EMERALD, Lists.newArrayList(5000, 12500));
 
         int woods = 12;
         for(int i=0; i < woods; i++) {
@@ -131,17 +133,17 @@ public class TeleporterPlate extends PressurePlateBlock{
         super.onEntityCollision(state, world, pos, entity);
 
         Block blockBelow = world.getBlockState(pos.add(0, -1, 0)).getBlock();
-        int tpStrength = blockTeleportationStrength.getOrDefault(blockBelow, teleportationStrengthLevel.get(TeleportationStrengthLevel.BASIC));
+        List tpStrengthRange = blockTeleportationStrength.getOrDefault(blockBelow, teleportationStrengthLevel.get(TeleportationStrengthLevel.BASIC));
         List entities = this.getEntities(world, pos);
         if (Objects.nonNull(entities)) {
-            System.out.println("This entity will teleport with strength of " + tpStrength);
+            System.out.printf("This entity will teleport with strength of range %s-%s%n", tpStrengthRange.get(0), tpStrengthRange.get(1));
             System.out.println("Collided with some entities. There are " + entities.size() + " entities.");
             for(Object o: entities) {
                 Entity e = (Entity) o;
                 final ServerCommandSource commandSource = e.getCommandSource();
                 MinecraftServer server = world.getServer();
                 if (Objects.nonNull(server)) {
-                    server.getCommandManager().execute(commandSource, getSpreadCommand(2, 5));
+                    server.getCommandManager().execute(commandSource, getSpreadCommand((int)tpStrengthRange.get(0), (int)tpStrengthRange.get(1)));
                 }
             }
         }
