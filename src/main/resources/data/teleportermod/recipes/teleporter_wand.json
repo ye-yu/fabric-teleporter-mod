@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "/",
+    "C"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blaze_powder"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:chorus_fruit"
+    }
+  },
+  "result": {
+    "item": "teleportermod:teleporter_wand",
+    "count": 1
+  }
+}
