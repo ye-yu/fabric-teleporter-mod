@@ -6,6 +6,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.IWorld;
@@ -127,12 +129,26 @@ public class TeleporterPlate extends PressurePlateBlock{
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
+
         Block blockBelow = world.getBlockState(pos.add(0, -1, 0)).getBlock();
         int tpStrength = blockTeleportationStrength.getOrDefault(blockBelow, teleportationStrengthLevel.get(TeleportationStrengthLevel.BASIC));
         List entities = this.getEntities(world, pos);
         if (Objects.nonNull(entities)) {
             System.out.println("This entity will teleport with strength of " + tpStrength);
             System.out.println("Collided with some entities. There are " + entities.size() + " entities.");
+            for(Object o: entities) {
+                Entity e = (Entity) o;
+                final ServerCommandSource commandSource = e.getCommandSource();
+                MinecraftServer server = world.getServer();
+                if (Objects.nonNull(server)) {
+                    server.getCommandManager().execute(commandSource, getSpreadCommand(2, 5));
+                }
+            }
         }
     }
+
+    private static String getSpreadCommand(int min, int max) {
+        return String.format("/spreadplayers ~ ~ %d %d false @s", min, max);
+    }
+
 }
