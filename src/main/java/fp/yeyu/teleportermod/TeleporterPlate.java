@@ -6,8 +6,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.IWorld;
@@ -18,6 +16,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class TeleporterPlate extends PressurePlateBlock{
+    private enum TeleportationStrengthLevel {
+        BASIC, WOOD, LOG, IRON, GOLD, DIAMOND, EMERALD
+    }
     private final ActivationRule type;
 
     private static Block[] validBlocks = new Block[]{
@@ -62,21 +63,30 @@ public class TeleporterPlate extends PressurePlateBlock{
             Blocks.EMERALD_BLOCK
     };
     private static final HashMap<Block, Integer> blockTeleportationStrength = new HashMap<>();
+    private static final HashMap<TeleportationStrengthLevel, Integer> teleportationStrengthLevel = new HashMap<>();
 
     static {
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.BASIC, 3);
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.WOOD, 10);
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.LOG, 50);
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.IRON, 500);
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.GOLD, 2000);
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.DIAMOND, 5000);
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.EMERALD, 12500);
+
         int woods = 12;
         for(int i=0; i < woods; i++) {
-            blockTeleportationStrength.put(validBlocks[i], 10);
+            blockTeleportationStrength.put(validBlocks[i], teleportationStrengthLevel.get(TeleportationStrengthLevel.WOOD));
         }
 
         for(int i=12; i < 2 * woods; i++) {
-            blockTeleportationStrength.put(validBlocks[i], 50);
+            blockTeleportationStrength.put(validBlocks[i], teleportationStrengthLevel.get(TeleportationStrengthLevel.LOG));
         }
 
-        blockTeleportationStrength.put(Blocks.IRON_BLOCK, 500);
-        blockTeleportationStrength.put(Blocks.GOLD_BLOCK, 2000);
-        blockTeleportationStrength.put(Blocks.DIAMOND_BLOCK, 5000);
-        blockTeleportationStrength.put(Blocks.EMERALD_BLOCK, 12500);
+        blockTeleportationStrength.put(Blocks.IRON_BLOCK, teleportationStrengthLevel.get(TeleportationStrengthLevel.IRON));
+        blockTeleportationStrength.put(Blocks.GOLD_BLOCK, teleportationStrengthLevel.get(TeleportationStrengthLevel.GOLD));
+        blockTeleportationStrength.put(Blocks.DIAMOND_BLOCK, teleportationStrengthLevel.get(TeleportationStrengthLevel.DIAMOND));
+        blockTeleportationStrength.put(Blocks.EMERALD_BLOCK, teleportationStrengthLevel.get(TeleportationStrengthLevel.EMERALD));
     }
 
     private static boolean isValidBlock(Block block) {
@@ -88,21 +98,7 @@ public class TeleporterPlate extends PressurePlateBlock{
 
     protected TeleporterPlate(PressurePlateBlock.ActivationRule type, Settings settings) {
         super(type, settings);
-        this.type = type;
-    }
-
-    @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        super.onBreak(world, pos, state, player);
-        System.out.println("Broken on " + pos);
-    }
-
-    @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        super.onPlaced(world, pos, state, placer, itemStack);
-        System.out.println("Placed on " + pos);
-        Block blockBelow = world.getBlockState(pos.add(0, -1, 0)).getBlock();
-        System.out.println("Block below is " + blockBelow + ". Valid block status: " + isValidBlock(blockBelow));
+        this.type = type; // dont remove, used in getEntities method
     }
 
     @Override
@@ -131,11 +127,12 @@ public class TeleporterPlate extends PressurePlateBlock{
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
+        Block blockBelow = world.getBlockState(pos.add(0, -1, 0)).getBlock();
+        int tpStrength = blockTeleportationStrength.getOrDefault(blockBelow, teleportationStrengthLevel.get(TeleportationStrengthLevel.BASIC));
         List entities = this.getEntities(world, pos);
-
         if (Objects.nonNull(entities)) {
+            System.out.println("This entity will teleport with strength of " + tpStrength);
             System.out.println("Collided with some entities. There are " + entities.size() + " entities.");
         }
-
     }
 }
