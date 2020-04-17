@@ -11,10 +11,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -103,16 +101,6 @@ public class TeleporterPlate extends PressurePlateBlock{
     protected TeleporterPlate(PressurePlateBlock.ActivationRule type, Settings settings) {
         super(type, settings);
         this.type = type; // dont remove, used in getEntities method
-    }
-
-    @Override
-    protected void playPressSound(IWorld world, BlockPos pos) {
-        super.playPressSound(world, pos);
-    }
-
-    @Override
-    protected void playDepressSound(IWorld world, BlockPos pos) {
-        super.playPressSound(world, pos);
     }
 
     @SuppressWarnings("rawtypes")
