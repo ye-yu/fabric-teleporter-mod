@@ -119,13 +119,12 @@ public class TeleporterPlate extends PressurePlateBlock{
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-
+        boolean isOn = this.getRedstoneOutput(state) > 0;
+        if (!isOn) return;
         Block blockBelow = world.getBlockState(pos.add(0, -1, 0)).getBlock();
         List tpStrengthRange = blockTeleportationStrength.getOrDefault(blockBelow, teleportationStrengthLevel.get(TeleportationStrengthLevel.BASIC));
         List entities = this.getEntities(world, pos);
         if (Objects.nonNull(entities)) {
-            System.out.printf("This entity will teleport with strength of range %s-%s%n", tpStrengthRange.get(0), tpStrengthRange.get(1));
-            System.out.println("Collided with some entities. There are " + entities.size() + " entities.");
             for(Object o: entities) {
                 Entity e = (Entity) o;
                 final ServerCommandSource commandSource = e.getCommandSource();
@@ -135,6 +134,7 @@ public class TeleporterPlate extends PressurePlateBlock{
                 }
             }
         }
+        this.updatePlateState(world, pos, state, 0);
     }
 
     private static String getSpreadCommand(int min, int max) {
