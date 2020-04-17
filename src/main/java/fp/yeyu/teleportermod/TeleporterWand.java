@@ -66,10 +66,8 @@ public class TeleporterWand extends FishingRodItem {
 
         // add item damage
         ItemStack itemStack = playerEntity.getStackInHand(hand);
-        itemStack.damage(1, playerEntity, (p) -> {
-            p.sendToolBreakStatus(hand);
-        });
-        System.out.println("Is Damageable: " + itemStack.isDamageable());
+        itemStack.damage(1, playerEntity, (p) -> p.sendToolBreakStatus(hand));
+
         return new TypedActionResult<>(ActionResult.SUCCESS, playerEntity.getStackInHand(hand));
     }
 
