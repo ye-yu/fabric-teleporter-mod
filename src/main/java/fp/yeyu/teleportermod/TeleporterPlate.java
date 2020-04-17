@@ -21,7 +21,7 @@ public class TeleporterPlate extends PressurePlateBlock{
     }
     private final ActivationRule type;
 
-    private static Block[] validBlocks = new Block[]{
+    private static final Block[] validBlocks = new Block[]{
             // tp strength of 10 blocks
             Blocks.ACACIA_WOOD,
             Blocks.BIRCH_WOOD,
