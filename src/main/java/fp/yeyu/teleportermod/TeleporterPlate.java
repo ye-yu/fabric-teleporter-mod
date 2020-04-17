@@ -115,6 +115,7 @@ public class TeleporterPlate extends PressurePlateBlock{
         super.playPressSound(world, pos);
     }
 
+    @SuppressWarnings("rawtypes")
     private List getEntities(World world, BlockPos pos) {
         Box box = BOX.offset(pos);
         switch(this.type) {
@@ -126,6 +127,7 @@ public class TeleporterPlate extends PressurePlateBlock{
         return null;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
