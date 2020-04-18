@@ -1,7 +1,7 @@
 package fp.yeyu.teleportermod;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,20 +35,18 @@ public class TeleporterWand extends FishingRodItem {
         }
 
         boolean searchAir = false;
-        BlockPos blockPos = playerEntity.getBlockPos();
-        for(int i=blockPos.getY(); i < 255; i++) {
-            blockPos = blockPos.add(0, 1, 0);
-            BlockState blockState = world.getBlockState(blockPos);
+        int tickEffect = 20;
+        Vec3d pos = playerEntity.getPos();
+        for(int i=(int)pos.getY(); i < 255; i++) {
+            BlockState blockState = world.getBlockState(new BlockPos(pos));
             if (Objects.nonNull(blockState)) {
-                boolean isAirBlock = blockState.getBlock() == Blocks.AIR;
-                if(isAirBlock) {
-                    // we teleport upwards here
-                    if (searchAir) {
-                        double x = blockPos.getX(), y = blockPos.getY(), z = blockPos.getZ();
-                        playerEntity.requestTeleport(x, y+0.5, z);
-                        giveEntityEffect(playerEntity, 20);
-                        break;
-                    } // else dont do anything and keep going up
+                pos = pos.add(0, 1, 0);
+                boolean isAirBlock = blockState.getMaterial() == Material.AIR;
+                System.out.printf("Checking block at %s. Block name: %s. Is air block? %s%n", pos, blockState.getBlock(), isAirBlock);
+                if(isAirBlock && searchAir) { // if not air block in the first place, dont do anything and keep going up
+                    // we save teleportation point here
+                    pos = pos.add(0, -1, 0);
+                    break;
                 } else { //solid ground has been found, search for air now
                     searchAir = true;
                 }
@@ -56,12 +54,14 @@ public class TeleporterWand extends FishingRodItem {
         }
 
         if (!searchAir) { // solid block is not found
-            final Vec3d pos = playerEntity.getPos();
-            double x = pos.getX(), y = pos.getY(), z = pos.getZ();
-            playerEntity.requestTeleport(x, y+10.5, z);
-            giveEntityEffect(playerEntity, 70);
+            pos = playerEntity.getPos(); // reset position
+            pos = pos.add(0, 10, 0);
+            tickEffect = 70; // increase duration
         }
 
+        double x = pos.getX(), y = pos.getY(), z = pos.getZ();
+        playerEntity.requestTeleport(x, y+0.5, z);
+        giveEntityEffect(playerEntity, tickEffect);
         playerEntity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
 
         // add item damage
