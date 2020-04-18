@@ -42,11 +42,12 @@ public class TeleporterWand extends FishingRodItem {
             if (Objects.nonNull(blockState)) {
                 pos = pos.add(0, 1, 0);
                 boolean isAirBlock = blockState.getMaterial() == Material.AIR;
-                System.out.printf("Checking block at %s. Block name: %s. Is air block? %s%n", pos, blockState.getBlock(), isAirBlock);
-                if(isAirBlock && searchAir) { // if not air block in the first place, dont do anything and keep going up
+                if(isAirBlock) { // if not air block in the first place, dont do anything and keep going up
                     // we save teleportation point here
-                    pos = pos.add(0, -1, 0);
-                    break;
+                    if (searchAir) {
+                        pos = pos.add(0, -1, 0);
+                        break;
+                    }
                 } else { //solid ground has been found, search for air now
                     searchAir = true;
                 }
