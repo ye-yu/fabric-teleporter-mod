@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "teleportermod:block/teleporter_plate"
+    },
+    "powered=true": {
+      "model": "teleportermod:block/teleporter_plate_down"
+    }
+  }
+}

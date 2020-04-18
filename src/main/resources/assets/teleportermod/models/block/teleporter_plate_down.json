@@ -1,0 +1,6 @@
+{
+  "parent": "block/acacia_pressure_plate_down",
+  "textures": {
+    "texture": "teleportermod:block/teleporter_plate_down"
+  }
+}
