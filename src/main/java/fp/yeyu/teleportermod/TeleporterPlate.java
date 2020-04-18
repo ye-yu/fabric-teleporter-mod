@@ -115,30 +115,33 @@ public class TeleporterPlate extends PressurePlateBlock{
         return null;
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
-        boolean isOn = this.getRedstoneOutput(state) > 0;
-        if (!isOn) return;
+    protected void updateNeighbors(World world, BlockPos pos) {
+        super.updateNeighbors(world, pos);
+        BlockState blockState = world.getBlockState(pos);
+        if(blockState.get(PressurePlateBlock.POWERED)) {
+            this.onPressureStateOn(world, pos);
+        }
+    }
+
+    @SuppressWarnings("rawtypes")
+    private void onPressureStateOn(World world, BlockPos pos) {
         Block blockBelow = world.getBlockState(pos.add(0, -1, 0)).getBlock();
         List tpStrengthRange = blockTeleportationStrength.getOrDefault(blockBelow, teleportationStrengthLevel.get(TeleportationStrengthLevel.BASIC));
         List entities = this.getEntities(world, pos);
         if (Objects.nonNull(entities)) {
-            for(Object o: entities) {
+            for (Object o : entities) {
                 Entity e = (Entity) o;
                 final ServerCommandSource commandSource = e.getCommandSource();
                 MinecraftServer server = world.getServer();
                 if (Objects.nonNull(server)) {
-                    server.getCommandManager().execute(commandSource, getSpreadCommand((int)tpStrengthRange.get(0), (int)tpStrengthRange.get(1)));
+                    server.getCommandManager().execute(commandSource, getSpreadCommand((int) tpStrengthRange.get(0), (int) tpStrengthRange.get(1)));
                 }
             }
         }
-        this.updatePlateState(world, pos, state, 0);
     }
 
     private static String getSpreadCommand(int min, int max) {
         return String.format("/spreadplayers ~ ~ %d %d false @s", min, max);
     }
-
 }
