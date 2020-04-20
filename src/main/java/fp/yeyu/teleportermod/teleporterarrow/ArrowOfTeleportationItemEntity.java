@@ -31,7 +31,6 @@ public class ArrowOfTeleportationItemEntity extends ProjectileEntity {
     @Override
     protected void onHit(HitResult hitResult) {
         super.onHit(hitResult);
-        System.out.println("Arrow hit on " + hitResult.getType());
     }
 
     @Override
@@ -39,7 +38,6 @@ public class ArrowOfTeleportationItemEntity extends ProjectileEntity {
         super.onHit(target);
         StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.GLOWING, 20, 0);
         target.addStatusEffect(statusEffectInstance);
-        System.out.println("Arrow hit target " + target.getEntityName());
     }
 
     protected ItemStack asItemStack() {
