@@ -7,7 +7,7 @@
   "icon": "assets/teleportermod/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "client": [
       "fp.yeyu.teleportermod.Teleportermod"
     ]
   },
