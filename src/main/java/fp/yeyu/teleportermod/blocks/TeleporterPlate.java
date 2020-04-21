@@ -22,6 +22,7 @@ public class TeleporterPlate extends PressurePlateBlock{
         BASIC, WOOD, LOG, IRON, GOLD, DIAMOND, EMERALD
     }
     private final ActivationRule type;
+    public static final String MOD_NAME = "teleporter_plate";
 
     private static final Block[] validBlocks = new Block[]{
             // tp strength of 10 blocks

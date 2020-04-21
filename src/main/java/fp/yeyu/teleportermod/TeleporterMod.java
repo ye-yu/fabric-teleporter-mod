@@ -24,6 +24,10 @@ import net.minecraft.util.registry.Registry;
 public class TeleporterMod implements ModInitializer {
     public static final String NAMESPACE = "teleportermod";
 
+    public static final Identifier TELEPORTER_WAND_ID = new Identifier(NAMESPACE, TeleporterWand.MOD_NAME);
+    public static final Identifier TELEPORTER_PLATE_ID = new Identifier(NAMESPACE, TeleporterPlate.MOD_NAME);
+    public static final Identifier ARROW_OF_TELEPORTATION_ID = new Identifier(NAMESPACE, ArrowOfTeleportationItem.MOD_NAME);
+
     public static final TeleporterWand TELEPORTER_WAND = new TeleporterWand((new Item
             .Settings())
             .maxDamage(35)
@@ -51,7 +55,7 @@ public class TeleporterMod implements ModInitializer {
 
     public static final EntityType<ArrowOfTeleportationItemEntity> ARROW_OF_TELEPORTATION_ITEM_ENTITY = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(NAMESPACE, "arrow_of_teleportation"),
+            ARROW_OF_TELEPORTATION_ID,
             FabricEntityTypeBuilder
                     .create(EntityCategory.MISC, (EntityType.EntityFactory<ArrowOfTeleportationItemEntity>) ArrowOfTeleportationItemEntity::new)
                     .size(EntityDimensions.fixed(0.5f, 0.5f)).build()
@@ -59,13 +63,13 @@ public class TeleporterMod implements ModInitializer {
 
     public void onInitialize() {
         // registering teleporter wand
-        Registry.register(Registry.ITEM, new Identifier(NAMESPACE, "teleporter_wand"), TELEPORTER_WAND);
+        Registry.register(Registry.ITEM, TELEPORTER_WAND_ID, TELEPORTER_WAND);
 
         // registering teleporter plate
-        Registry.register(Registry.BLOCK, new Identifier(NAMESPACE, "teleporter_plate"), TELEPORTER_PLATE);
-        Registry.register(Registry.ITEM, new Identifier(NAMESPACE, "teleporter_plate"), TELEPORTER_PLATE_ITEM);
+        Registry.register(Registry.BLOCK, TELEPORTER_PLATE_ID, TELEPORTER_PLATE);
+        Registry.register(Registry.ITEM, TELEPORTER_PLATE_ID, TELEPORTER_PLATE_ITEM);
 
         // registering arrow of teleportation
-        Registry.register(Registry.ITEM, new Identifier(NAMESPACE, "arrow_of_teleportation"), ARROW_OF_TELEPORTATION_ITEM);
+        Registry.register(Registry.ITEM, ARROW_OF_TELEPORTATION_ID, ARROW_OF_TELEPORTATION_ITEM);
     }
 }

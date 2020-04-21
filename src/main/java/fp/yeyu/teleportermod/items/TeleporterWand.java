@@ -18,6 +18,8 @@ import net.minecraft.world.World;
 import java.util.Objects;
 
 public class TeleporterWand extends FishingRodItem {
+    public static final String MOD_NAME = "teleporter_wand";
+
     public TeleporterWand(Settings settings) {
         super(settings);
     }

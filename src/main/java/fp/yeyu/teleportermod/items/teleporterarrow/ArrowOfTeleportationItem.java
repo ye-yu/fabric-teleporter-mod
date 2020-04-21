@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ArrowOfTeleportationItem extends ArrowItem {
+    public static final String MOD_NAME = "arrow_of_teleportation";
+
     public ArrowOfTeleportationItem(Item.Settings settings) {
         super(settings);
     }

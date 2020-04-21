@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.client.render.entity.ArrowEntityRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.EntityType;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ public class TeleporterModClient implements ClientModInitializer {
     public void onInitializeClient() {
         // registering arrow of teleportation client side rendering
         EntityRendererRegistry.INSTANCE.register(ARROW_OF_TELEPORTATION_ITEM_ENTITY, (entityRenderDispatcher, context) -> new ArrowEntityRenderer(entityRenderDispatcher));
-        ClientSidePacketRegistry.INSTANCE.register(new Identifier(NAMESPACE, "arrow_of_teleportation"), TeleporterModClient::spawnEntity);
+        ClientSidePacketRegistry.INSTANCE.register(TeleporterMod.ARROW_OF_TELEPORTATION_ID, TeleporterModClient::spawnEntity);
     }
 
     private static void spawnEntity(PacketContext context, PacketByteBuf buffer) {
