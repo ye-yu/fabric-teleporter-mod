@@ -1,6 +1,7 @@
 package fp.yeyu.teleportermod.items.teleporterarrow;
 
 import fp.yeyu.teleportermod.TeleporterMod;
+import io.netty.buffer.Unpooled;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -9,6 +10,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.Packet;
+import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
@@ -29,8 +34,8 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
     public ArrowOfTeleportationItemEntity(World world, double x, double y, double z){
         super(TeleporterMod.ARROW_OF_TELEPORTATION_ITEM_ENTITY, world);
         this.setPos(x, y, z);
-
     }
+
     public ArrowOfTeleportationItemEntity(World world) {
         super(TeleporterMod.ARROW_OF_TELEPORTATION_ITEM_ENTITY, world);
     }
@@ -53,4 +58,16 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
     }
 
     public void initFromStack(ItemStack stack) { }
+
+    @Override
+    public Packet<?> createSpawnPacket() {
+        super.createSpawnPacket();
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        buf.writeInt(this.getEntityId());
+        buf.writeUuid(this.getUuid());
+        buf.writeDouble(this.getX());
+        buf.writeDouble(this.getY());
+        buf.writeDouble(this.getZ());
+        return new CustomPayloadS2CPacket(new Identifier(TeleporterMod.NAMESPACE, "arrow_of_teleportation"), buf);
+    }
 }
