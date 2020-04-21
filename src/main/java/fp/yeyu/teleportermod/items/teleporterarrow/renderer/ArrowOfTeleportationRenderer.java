@@ -1,4 +1,4 @@
-package fp.yeyu.teleportermod.teleporterarrow.renderer;
+package fp.yeyu.teleportermod.items.teleporterarrow.renderer;
 
 import fp.yeyu.teleportermod.TeleporterModClient;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;

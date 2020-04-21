@@ -1,4 +1,4 @@
-package fp.yeyu.teleportermod;
+package fp.yeyu.teleportermod.items;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;

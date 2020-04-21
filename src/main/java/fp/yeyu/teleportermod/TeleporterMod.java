@@ -1,7 +1,9 @@
 package fp.yeyu.teleportermod;
 
-import fp.yeyu.teleportermod.teleporterarrow.ArrowOfTeleportationItem;
-import fp.yeyu.teleportermod.teleporterarrow.ArrowOfTeleportationItemEntity;
+import fp.yeyu.teleportermod.blocks.TeleporterPlate;
+import fp.yeyu.teleportermod.items.TeleporterWand;
+import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItem;
+import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItemEntity;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;

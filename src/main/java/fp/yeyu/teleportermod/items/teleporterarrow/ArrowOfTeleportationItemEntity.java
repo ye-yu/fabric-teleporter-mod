@@ -1,4 +1,4 @@
-package fp.yeyu.teleportermod.teleporterarrow;
+package fp.yeyu.teleportermod.items.teleporterarrow;
 
 import fp.yeyu.teleportermod.TeleporterMod;
 import net.minecraft.entity.EntityType;

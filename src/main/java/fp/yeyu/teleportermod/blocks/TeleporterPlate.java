@@ -1,4 +1,4 @@
-package fp.yeyu.teleportermod;
+package fp.yeyu.teleportermod.blocks;
 
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -98,7 +98,7 @@ public class TeleporterPlate extends PressurePlateBlock{
         return false;
     }
 
-    protected TeleporterPlate(PressurePlateBlock.ActivationRule type, Settings settings) {
+    public TeleporterPlate(PressurePlateBlock.ActivationRule type, Settings settings) {
         super(type, settings);
         this.type = type; // dont remove, used in getEntities method
     }

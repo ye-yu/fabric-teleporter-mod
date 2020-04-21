@@ -1,6 +1,6 @@
 package fp.yeyu.teleportermod;
 
-import fp.yeyu.teleportermod.teleporterarrow.ArrowOfTeleportationItemEntity;
+import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItemEntity;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
