@@ -3,6 +3,7 @@
   "package": "fp.yeyu.teleportermod.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ArrowEntityMixin"
   ],
   "client": [
   ],
