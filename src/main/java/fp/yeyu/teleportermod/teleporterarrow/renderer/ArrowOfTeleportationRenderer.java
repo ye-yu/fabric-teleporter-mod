@@ -1,6 +1,6 @@
 package fp.yeyu.teleportermod.teleporterarrow.renderer;
 
-import fp.yeyu.teleportermod.Teleportermod;
+import fp.yeyu.teleportermod.TeleporterModClient;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.entity.projectile.ArrowEntity;
@@ -13,6 +13,6 @@ public class ArrowOfTeleportationRenderer extends ProjectileEntityRenderer<Arrow
 
     @Override
     public Identifier getTexture(ArrowEntity entity) {
-        return new Identifier(Teleportermod.NAMESPACE, "textures/entity/arrow.png");
+        return new Identifier(TeleporterModClient.NAMESPACE, "textures/entity/arrow.png");
     }
 }

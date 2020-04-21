@@ -1,6 +1,6 @@
 package fp.yeyu.teleportermod.teleporterarrow;
 
-import fp.yeyu.teleportermod.Teleportermod;
+import fp.yeyu.teleportermod.TeleporterMod;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -17,15 +17,15 @@ public class ArrowOfTeleportationItemEntity extends ProjectileEntity {
     }
 
     public ArrowOfTeleportationItemEntity(World world, LivingEntity owner) {
-        super(Teleportermod.ARROW_OF_TELEPORTATION_ITEM_ENTITY, owner, world);
+        super(TeleporterMod.ARROW_OF_TELEPORTATION_ITEM_ENTITY, owner, world);
     }
 
     public ArrowOfTeleportationItemEntity(World world, double x, double y, double z) {
-        super(Teleportermod.ARROW_OF_TELEPORTATION_ITEM_ENTITY, x, y, z, world);
+        super(TeleporterMod.ARROW_OF_TELEPORTATION_ITEM_ENTITY, x, y, z, world);
     }
 
     public ArrowOfTeleportationItemEntity(World world) {
-        super(Teleportermod.ARROW_OF_TELEPORTATION_ITEM_ENTITY, world);
+        super(TeleporterMod.ARROW_OF_TELEPORTATION_ITEM_ENTITY, world);
     }
 
     @Override
@@ -41,6 +41,6 @@ public class ArrowOfTeleportationItemEntity extends ProjectileEntity {
     }
 
     protected ItemStack asItemStack() {
-        return new ItemStack(Teleportermod.ARROW_OF_TELEPORTATION_ITEM);
+        return new ItemStack(TeleporterMod.ARROW_OF_TELEPORTATION_ITEM);
     }
 }
