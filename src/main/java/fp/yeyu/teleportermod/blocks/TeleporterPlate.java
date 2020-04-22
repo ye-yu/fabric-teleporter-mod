@@ -1,6 +1,7 @@
 package fp.yeyu.teleportermod.blocks;
 
 import com.google.common.collect.Lists;
+import fp.yeyu.teleportermod.utils.Commands;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -133,16 +134,12 @@ public class TeleporterPlate extends PressurePlateBlock{
         if (Objects.nonNull(entities)) {
             for (Object o : entities) {
                 Entity e = (Entity) o;
-                final ServerCommandSource commandSource = e.getCommandSource();
-                MinecraftServer server = world.getServer();
-                if (Objects.nonNull(server)) {
-                    server.getCommandManager().execute(commandSource, getSpreadCommand((int) tpStrengthRange.get(0), (int) tpStrengthRange.get(1)));
+                if (Commands.spreadPlayerSelf(world, e, (int) tpStrengthRange.get(0), (int) tpStrengthRange.get(1))) {
+                    LOGGER.info("Spread player @s is successful.");
+                } else {
+                    LOGGER.info(String.format("Entity %s cannot use teleportation.%n", e.getName()));
                 }
             }
         }
-    }
-
-    private static String getSpreadCommand(int min, int max) {
-        return String.format("/spreadplayers ~ ~ %d %d false @s", min, max);
     }
 }
