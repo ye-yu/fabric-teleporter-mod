@@ -59,11 +59,13 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
         final List<Integer> integers = TeleporterPlate.teleportationStrengthLevel.get(TeleporterPlate.TeleportationStrengthLevel.BASIC);
         final int min = integers.get(0);
         final int max = integers.get(1);
+        Commands.setCommandFeedbackOutput(target, false);
         if (Commands.spreadPlayerSelf(world, target, min, max)) {
             LOGGER.info("Spread player @s is successful.");
         } else {
             LOGGER.info(String.format("Entity %s cannot use teleportation.%n", target.getName()));
         }
+        Commands.setCommandFeedbackOutput(target, true);
     }
 
     protected ItemStack asItemStack() {

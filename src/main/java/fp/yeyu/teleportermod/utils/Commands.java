@@ -19,4 +19,13 @@ public class Commands {
     private static String getSpreadCommand(int min, int max) {
         return String.format("/spreadplayers ~ ~ %d %d false @s", min, max);
     }
+
+    public static boolean setCommandFeedbackOutput(Entity entity, boolean activate) {
+        final World world = entity.getEntityWorld();
+        final MinecraftServer server = world.getServer();
+        if (Objects.isNull(server)) return false;
+        final ServerCommandSource commandSource = entity.getCommandSource();
+        server.getCommandManager().execute(commandSource, String.format("/gamerule sendCommandFeedback %s", activate));
+        return true;
+    }
 }
