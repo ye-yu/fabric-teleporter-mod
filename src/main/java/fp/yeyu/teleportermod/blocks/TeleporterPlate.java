@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class TeleporterPlate extends PressurePlateBlock{
-    private enum TeleportationStrengthLevel {
+    public enum TeleportationStrengthLevel {
         BASIC, WOOD, LOG, IRON, GOLD, DIAMOND, EMERALD
     }
     private final ActivationRule type;
@@ -66,8 +66,8 @@ public class TeleporterPlate extends PressurePlateBlock{
             // tp strength of 12500 blocks
             Blocks.EMERALD_BLOCK
     };
-    private static final HashMap<Block, List<Integer>> blockTeleportationStrength = new HashMap<>();
-    private static final HashMap<TeleportationStrengthLevel, List<Integer>> teleportationStrengthLevel = new HashMap<>();
+    public static final HashMap<Block, List<Integer>> blockTeleportationStrength = new HashMap<>();
+    public static final HashMap<TeleportationStrengthLevel, List<Integer>> teleportationStrengthLevel = new HashMap<>();
 
     static {
         teleportationStrengthLevel.put(TeleportationStrengthLevel.BASIC, Lists.newArrayList(2, 5));

@@ -1,6 +1,8 @@
 package fp.yeyu.teleportermod.items.teleporterarrow;
 
 import fp.yeyu.teleportermod.TeleporterMod;
+import fp.yeyu.teleportermod.blocks.TeleporterPlate;
+import fp.yeyu.teleportermod.utils.Commands;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -16,6 +18,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class ArrowOfTeleportationItemEntity extends ArrowEntity {
 
@@ -51,6 +55,15 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
         StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.GLOWING, 20, 0);
         target.addStatusEffect(statusEffectInstance);
         LOGGER.info("Arrow hit target " + target.getEntityName());
+        final World entityWorld = target.getEntityWorld();
+        final List<Integer> integers = TeleporterPlate.teleportationStrengthLevel.get(TeleporterPlate.TeleportationStrengthLevel.BASIC);
+        final int min = integers.get(0);
+        final int max = integers.get(1);
+        if (Commands.spreadPlayerSelf(world, target, min, max)) {
+            LOGGER.info("Spread player @s is successful.");
+        } else {
+            LOGGER.info(String.format("Entity %s cannot use teleportation.%n", target.getName()));
+        }
     }
 
     protected ItemStack asItemStack() {
