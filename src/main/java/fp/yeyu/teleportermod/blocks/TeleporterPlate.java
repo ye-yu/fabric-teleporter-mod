@@ -135,9 +135,7 @@ public class TeleporterPlate extends PressurePlateBlock{
             for (Object o : entities) {
                 Entity e = (Entity) o;
                 Commands.setCommandFeedbackOutput(e, false);
-                if (Commands.spreadPlayerSelf(world, e, (int) tpStrengthRange.get(0), (int) tpStrengthRange.get(1))) {
-                    LOGGER.info("Spread player @s is successful.");
-                } else {
+                if (!Commands.spreadPlayerSelf(world, e, (int) tpStrengthRange.get(0), (int) tpStrengthRange.get(1))) {
                     LOGGER.info(String.format("Entity %s cannot use teleportation.%n", e.getName()));
                 }
             }

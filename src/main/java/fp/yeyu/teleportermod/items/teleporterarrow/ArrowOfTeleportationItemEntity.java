@@ -60,9 +60,7 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
         final int min = integers.get(0);
         final int max = integers.get(1);
         Commands.setCommandFeedbackOutput(target, false);
-        if (Commands.spreadPlayerSelf(world, target, min, max)) {
-            LOGGER.info("Spread player @s is successful.");
-        } else {
+        if (!Commands.spreadPlayerSelf(world, target, min, max)) {
             LOGGER.info(String.format("Entity %s cannot use teleportation.%n", target.getName()));
         }
     }
