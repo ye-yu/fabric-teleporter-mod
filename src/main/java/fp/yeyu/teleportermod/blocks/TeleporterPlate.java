@@ -140,7 +140,6 @@ public class TeleporterPlate extends PressurePlateBlock{
                 } else {
                     LOGGER.info(String.format("Entity %s cannot use teleportation.%n", e.getName()));
                 }
-                Commands.setCommandFeedbackOutput(e, true);
             }
         }
     }

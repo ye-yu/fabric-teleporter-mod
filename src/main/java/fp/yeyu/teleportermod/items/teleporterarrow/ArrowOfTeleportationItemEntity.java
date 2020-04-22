@@ -65,7 +65,6 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
         } else {
             LOGGER.info(String.format("Entity %s cannot use teleportation.%n", target.getName()));
         }
-        Commands.setCommandFeedbackOutput(target, true);
     }
 
     protected ItemStack asItemStack() {
