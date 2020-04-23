@@ -1,5 +1,6 @@
 package fp.yeyu.teleportermod;
 
+import com.mojang.brigadier.CommandDispatcher;
 import fp.yeyu.teleportermod.blocks.TeleporterPlate;
 import fp.yeyu.teleportermod.entities.SkeletonEndBlockEntity;
 import fp.yeyu.teleportermod.items.TeleporterWand;
@@ -18,6 +19,7 @@ import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.server.command.CommandSource;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
