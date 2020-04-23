@@ -3,8 +3,6 @@ package fp.yeyu.teleportermod.mixin;
 import fp.yeyu.teleportermod.TeleporterMod;
 import fp.yeyu.teleportermod.entities.SkeletonEndBlockEntity;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
@@ -28,7 +26,7 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity {
     public void tick() {
         super.tick();
         BlockState blockBelow = this.world.getBlockState(this.getBlockPos().add(0, -1, 0));
-        if (blockBelow.getMaterial() != Material.AIR && blockBelow.getBlock() == Blocks.END_STONE) {
+        if (SkeletonEndBlockEntity.isValidBlock(blockBelow.getBlock())) {
             tickSkeleton++;
         } else {
             tickSkeleton--;

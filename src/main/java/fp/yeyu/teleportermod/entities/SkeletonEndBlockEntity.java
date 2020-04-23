@@ -2,9 +2,9 @@ package fp.yeyu.teleportermod.entities;
 
 import fp.yeyu.teleportermod.TeleporterMod;
 import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItem;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -23,6 +23,20 @@ public class SkeletonEndBlockEntity extends AbstractSkeletonEntity {
 
     public static final String MOD_NAME = "skeleton";
     private int tickSkeleton = 0;
+    public static final Block[] validBlocks = new Block[]{
+            Blocks.END_STONE,
+            Blocks.END_STONE_BRICKS,
+            Blocks.END_STONE_BRICK_SLAB,
+            Blocks.END_STONE_BRICK_STAIRS,
+            Blocks.END_STONE_BRICK_WALL
+    };
+
+    public static boolean isValidBlock(Block testBlock) {
+        for(Block block: validBlocks) {
+            if(block == testBlock) return true;
+        }
+        return false;
+    }
 
     public SkeletonEndBlockEntity(EntityType<? extends SkeletonEndBlockEntity> entityType, World world) {
         super(entityType, world);
@@ -36,7 +50,8 @@ public class SkeletonEndBlockEntity extends AbstractSkeletonEntity {
     public void tick() {
         super.tick();
         BlockState blockBelow = this.world.getBlockState(this.getBlockPos().add(0, -1, 0));
-        if (blockBelow.getMaterial() != Material.AIR && blockBelow.getBlock() != Blocks.END_STONE) {
+        if (!isValidBlock(blockBelow.getBlock())) {
+            LOGGER.info("Below is not a valid block.");
             tickSkeleton++;
         } else {
             tickSkeleton--;
