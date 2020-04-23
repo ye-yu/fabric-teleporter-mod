@@ -46,6 +46,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 
+@SuppressWarnings("EntityConstructor")
 public abstract class AbstractSkeletonEntity extends HostileEntity implements RangedAttackMob {
     private final BowAttackGoal<AbstractSkeletonEntity> bowAttackGoal = new BowAttackGoal<>(this, 1.0D, 20, 15.0F);
     private final MeleeAttackGoal meleeAttackGoal = new MeleeAttackGoal(this, 1.2D, false) {
@@ -72,6 +73,7 @@ public abstract class AbstractSkeletonEntity extends HostileEntity implements Ra
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(6, new LookAroundGoal(this));
+        //noinspection RedundantArrayCreation
         this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
         this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.add(3, new FollowTargetGoal<>(this, IronGolemEntity.class, true));
