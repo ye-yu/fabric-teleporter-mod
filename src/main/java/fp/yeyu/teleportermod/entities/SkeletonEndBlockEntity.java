@@ -8,23 +8,16 @@ import net.minecraft.block.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ProjectileUtil;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.mob.StrayEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.Objects;
-import java.util.function.Predicate;
 
 public class SkeletonEndBlockEntity extends AbstractSkeletonEntity {
 
