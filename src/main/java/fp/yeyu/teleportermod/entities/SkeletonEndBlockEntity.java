@@ -51,7 +51,6 @@ public class SkeletonEndBlockEntity extends AbstractSkeletonEntity {
         super.tick();
         BlockState blockBelow = this.world.getBlockState(this.getBlockPos().add(0, -1, 0));
         if (!isValidBlock(blockBelow.getBlock())) {
-            LOGGER.info("Below is not a valid block.");
             tickSkeleton++;
         } else {
             tickSkeleton--;
