@@ -1,6 +1,7 @@
 package fp.yeyu.teleportermod;
 
 import fp.yeyu.teleportermod.blocks.TeleporterPlate;
+import fp.yeyu.teleportermod.entities.SkeletonEndBlockEntity;
 import fp.yeyu.teleportermod.items.TeleporterWand;
 import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItem;
 import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItemEntity;
@@ -12,6 +13,7 @@ import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -27,6 +29,7 @@ public class TeleporterMod implements ModInitializer {
     public static final Identifier TELEPORTER_WAND_ID = new Identifier(NAMESPACE, TeleporterWand.MOD_NAME);
     public static final Identifier TELEPORTER_PLATE_ID = new Identifier(NAMESPACE, TeleporterPlate.MOD_NAME);
     public static final Identifier ARROW_OF_TELEPORTATION_ID = new Identifier(NAMESPACE, ArrowOfTeleportationItem.MOD_NAME);
+    public static final Identifier SKELETON_END_BLOCK_ID = new Identifier(NAMESPACE, SkeletonEndBlockEntity.MOD_NAME);
 
     public static final TeleporterWand TELEPORTER_WAND = new TeleporterWand((new Item
             .Settings())
@@ -59,6 +62,14 @@ public class TeleporterMod implements ModInitializer {
             FabricEntityTypeBuilder
                     .create(EntityCategory.MISC, (EntityType.EntityFactory<ArrowOfTeleportationItemEntity>) ArrowOfTeleportationItemEntity::new)
                     .size(EntityDimensions.fixed(0.5f, 0.5f)).build()
+    );
+
+    public static final EntityType<SkeletonEndBlockEntity> SKELETON_END_BLOCK_ENTITY = Registry.register(
+            Registry.ENTITY_TYPE,
+            SKELETON_END_BLOCK_ID,
+            FabricEntityTypeBuilder
+                    .create(EntityCategory.AMBIENT, (EntityType.EntityFactory<SkeletonEndBlockEntity>) SkeletonEndBlockEntity::new)
+                    .size(EntityDimensions.fixed(0.6F, 1.99F)).build()
     );
 
     public void onInitialize() {

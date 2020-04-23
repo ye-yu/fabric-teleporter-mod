@@ -1,5 +1,6 @@
 {
   "item.teleportermod.teleporter_wand": "Teleporter Wand",
   "block.teleportermod.teleporter_plate": "Teleporter Plate",
-  "item.teleportermod.arrow_of_teleportation": "Arrow of Teleportation"
+  "item.teleportermod.arrow_of_teleportation": "Arrow of Teleportation",
+  "entity.teleportermod.skeleton": "Skeleton"
 }
