@@ -46,6 +46,7 @@ Just like any other Fabric mods, place the .jar file into the mods/ folder.
 - Increase AoT teleportation range based on Punch enchantment on bow: v0.4 - feature update
 - Add Teleporter Wand enchantment on the enchanting table (Unbreaking): v0.4
 - Add mechanism to teleport downwards (possibly by making new enchantment?): v0.4
-- Rigorous testing and patching: v0.5 - testing update
-- Future feature additions: >= v0.6, < v1 - feature update
+- Multiplayer Compatibility: 0.5
+- Rigorous testing and patching: v0.6 - testing update
+- Future feature additions: >= v0.7, < v1 - feature update
 - Final release: v1
