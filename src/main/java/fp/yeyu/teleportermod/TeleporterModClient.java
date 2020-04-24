@@ -2,6 +2,7 @@ package fp.yeyu.teleportermod;
 
 import fp.yeyu.teleportermod.entities.SkeletonEndBlockRenderer;
 import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItemEntity;
+import fp.yeyu.teleportermod.utils.Particles;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -9,7 +10,6 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.client.render.entity.ArrowEntityRenderer;
-import net.minecraft.client.render.entity.SkeletonEntityRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.PacketByteBuf;
@@ -28,6 +28,9 @@ public class TeleporterModClient implements ClientModInitializer {
 
         // registering renderer for skeleton
         EntityRendererRegistry.INSTANCE.register(TeleporterMod.SKELETON_END_BLOCK_ENTITY, (entityRenderDispatcher, context) -> new SkeletonEndBlockRenderer(entityRenderDispatcher));
+
+        // registering particle effect for arrow of teleportation
+        ClientSidePacketRegistry.INSTANCE.register(Particles.AOT_PARTICLE_ID, Particles.playParticleOnPlayer());
     }
 
     private static void spawnEntity(PacketContext context, PacketByteBuf buffer) {

@@ -5,6 +5,7 @@ import fp.yeyu.teleportermod.entities.SkeletonEndBlockEntity;
 import fp.yeyu.teleportermod.items.TeleporterWand;
 import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItem;
 import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItemEntity;
+import fp.yeyu.teleportermod.utils.Particles;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
@@ -17,6 +18,7 @@ import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.network.Packet;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
@@ -29,6 +31,7 @@ public class TeleporterMod implements ModInitializer {
     public static final Identifier TELEPORTER_PLATE_ID = new Identifier(NAMESPACE, TeleporterPlate.MOD_NAME);
     public static final Identifier ARROW_OF_TELEPORTATION_ID = new Identifier(NAMESPACE, ArrowOfTeleportationItem.MOD_NAME);
     public static final Identifier SKELETON_END_BLOCK_ID = new Identifier(NAMESPACE, SkeletonEndBlockEntity.MOD_NAME);
+    public static final Identifier AOT_PARTICLE_ID = Particles.AOT_PARTICLE_ID;
 
     public static final TeleporterWand TELEPORTER_WAND = new TeleporterWand((new Item
             .Settings())

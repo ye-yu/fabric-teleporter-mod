@@ -4,6 +4,8 @@ import fp.yeyu.teleportermod.TeleporterMod;
 import fp.yeyu.teleportermod.blocks.TeleporterPlate;
 import fp.yeyu.teleportermod.utils.Commands;
 import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.server.PlayerStream;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -17,9 +19,11 @@ import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ArrowOfTeleportationItemEntity extends ArrowEntity {
 
@@ -63,6 +67,17 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
         if (!Commands.spreadPlayerSelf(world, target, min, max)) {
             LOGGER.info(String.format("Entity %s cannot use teleportation.%n", target.getName()));
         }
+        playParticle(target.getEntityWorld(), new ChunkPos(target.getBlockPos()));
+    }
+
+    private void playParticle(World world, ChunkPos pos) {
+        Stream<PlayerEntity> watchingPlayers = PlayerStream.watching(world,pos);
+
+        PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
+        passedData.writeInt(30);
+
+        watchingPlayers.forEach(player ->
+                ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, TeleporterMod.AOT_PARTICLE_ID, passedData));
     }
 
     protected ItemStack asItemStack() {
