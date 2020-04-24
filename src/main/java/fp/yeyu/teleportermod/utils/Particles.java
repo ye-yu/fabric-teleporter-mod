@@ -22,7 +22,8 @@ public class Particles {
         return (context, data) -> {
             final PlayerEntity player = context.getPlayer();
             final int count = data.readInt();
-            spawnParticlesOnEntity(null, player, count);
+            int color = data.readInt();
+            spawnParticlesOnEntity(color, player, count);
         };
     }
 

@@ -75,6 +75,7 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
 
         PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
         passedData.writeInt(30);
+        passedData.writeInt(13548494);
 
         watchingPlayers.forEach(player ->
                 ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, TeleporterMod.AOT_PARTICLE_ID, passedData));
