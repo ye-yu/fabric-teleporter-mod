@@ -1,20 +1,28 @@
 package fp.yeyu.teleportermod.blocks;
 
 import com.google.common.collect.Lists;
+import fp.yeyu.teleportermod.TeleporterMod;
 import fp.yeyu.teleportermod.utils.Commands;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.server.PlayerStream;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class TeleporterPlate extends PressurePlateBlock{
     public enum TeleportationStrengthLevel {
@@ -124,6 +132,17 @@ public class TeleporterPlate extends PressurePlateBlock{
         }
     }
 
+    private void playParticle(World world, BlockPos pos) {
+        Stream<PlayerEntity> watchingPlayers = PlayerStream.watching(world,new ChunkPos(pos));
+
+        PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
+        passedData.writeBlockPos(pos);
+        passedData.writeInt(30);
+
+        watchingPlayers.forEach(player ->
+                ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, TeleporterMod.TPLATE_PARTICLE_ID, passedData));
+    }
+
     @SuppressWarnings("rawtypes")
     private void onPressureStateOn(World world, BlockPos pos) {
         Block blockBelow = world.getBlockState(pos.add(0, -1, 0)).getBlock();
@@ -138,5 +157,6 @@ public class TeleporterPlate extends PressurePlateBlock{
                 }
             }
         }
+        playParticle(world, pos);
     }
 }

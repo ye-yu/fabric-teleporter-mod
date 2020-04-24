@@ -44,11 +44,15 @@ public class Particles {
     }
 
     private static void spawnParticleOnBlockPos(BlockPos blockPos, int count) {
+        int color = 13548494;
         for(int k = 0; k < count; ++k) {
             double x = blockPos.getX() + Math.random();
             double y = blockPos.getY();
-            double z = blockPos.getY() + Math.random();
-            MinecraftClient.getInstance().particleManager.addParticle(ParticleTypes.END_ROD, x, y, z, 0, 0.5, 0);
+            double z = blockPos.getZ() + Math.random();
+            double d = (double)(color >> 16 & 255) / 255.0D;
+            double e = (double)(color >> 8 & 255) / 255.0D;
+            double f = (double)(color & 255) / 255.0D;
+            MinecraftClient.getInstance().particleManager.addParticle(ParticleTypes.ENTITY_EFFECT, x, y, z, d, e, f);
         }
     }
 

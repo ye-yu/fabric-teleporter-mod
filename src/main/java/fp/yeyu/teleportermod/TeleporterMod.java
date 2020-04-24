@@ -18,7 +18,6 @@ import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.network.Packet;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
@@ -32,6 +31,7 @@ public class TeleporterMod implements ModInitializer {
     public static final Identifier ARROW_OF_TELEPORTATION_ID = new Identifier(NAMESPACE, ArrowOfTeleportationItem.MOD_NAME);
     public static final Identifier SKELETON_END_BLOCK_ID = new Identifier(NAMESPACE, SkeletonEndBlockEntity.MOD_NAME);
     public static final Identifier AOT_PARTICLE_ID = Particles.AOT_PARTICLE_ID;
+    public static final Identifier TPLATE_PARTICLE_ID = Particles.TPLATE_PARTICLE_ID;
 
     public static final TeleporterWand TELEPORTER_WAND = new TeleporterWand((new Item
             .Settings())
