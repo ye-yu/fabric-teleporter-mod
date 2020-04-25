@@ -74,9 +74,4 @@ public class TeleporterWand extends FishingRodItem {
         return new TypedActionResult<>(ActionResult.SUCCESS, playerEntity.getStackInHand(hand));
     }
 
-    @Override
-    public int getEnchantability() {
-        return 0;
-    }
-
 }
