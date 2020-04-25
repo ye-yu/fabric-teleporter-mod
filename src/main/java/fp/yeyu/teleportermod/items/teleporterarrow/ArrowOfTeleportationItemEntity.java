@@ -1,7 +1,6 @@
 package fp.yeyu.teleportermod.items.teleporterarrow;
 
 import fp.yeyu.teleportermod.TeleporterMod;
-import fp.yeyu.teleportermod.blocks.TeleporterPlate;
 import fp.yeyu.teleportermod.utils.Commands;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
@@ -13,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 import net.minecraft.util.Identifier;
@@ -20,12 +20,13 @@ import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 public class ArrowOfTeleportationItemEntity extends ArrowEntity {
 
     private static final int[] range = new int[]{5, 10};
+    private int tpMultiplier = 1;
+    private static String PUNCH_TP_MULTIPLIER_ID = "punch_tp_multiplier";
 
     public ArrowOfTeleportationItemEntity(EntityType<? extends ArrowOfTeleportationItemEntity> entityType, World world) {
         super(entityType, world);
@@ -50,8 +51,9 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
 
     @Override
     protected void onHit(LivingEntity target) {
-        final int min = range[0];
-        final int max = range[1];
+        final int min = range[0] + 5*(this.tpMultiplier - 1);
+        final int max = range[1] + 5*(this.tpMultiplier - 1);
+        System.out.printf("Teleportation range: %d - %d%n", min, max);
         Commands.rtp(world, target, min, max);
         playParticle(target.getEntityWorld(), new ChunkPos(target.getBlockPos()), target);
     }
@@ -85,5 +87,21 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
         buf.writeDouble(this.getY());
         buf.writeDouble(this.getZ());
         return new CustomPayloadS2CPacket(new Identifier(TeleporterMod.NAMESPACE, "arrow_of_teleportation"), buf);
+    }
+
+    @Override
+    public void writeCustomDataToTag(CompoundTag tag) {
+        super.writeCustomDataToTag(tag);
+        tag.putInt(PUNCH_TP_MULTIPLIER_ID, this.tpMultiplier);
+    }
+
+    @Override
+    public void readCustomDataFromTag(CompoundTag tag) {
+        super.readCustomDataFromTag(tag);
+        this.setTpMultiplier(tag.getInt(PUNCH_TP_MULTIPLIER_ID));
+    }
+
+    public void setTpMultiplier(int lvl) {
+        this.tpMultiplier = lvl;
     }
 }
