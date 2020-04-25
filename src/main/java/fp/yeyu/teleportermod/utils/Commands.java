@@ -13,7 +13,6 @@ public class Commands {
         double x = center.getX() + lower + (2 * Math.random() - 1) * range;
         double z = center.getZ() + lower + (2 * Math.random() - 1) * range;
         double y = getY(world, x, z);
-        System.out.println("Teleportation distance: " + center.distanceTo(new Vec3d(x, y, z)));
         entity.requestTeleport(x, y, z);
     }
 
