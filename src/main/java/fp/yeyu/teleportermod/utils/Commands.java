@@ -18,7 +18,7 @@ public class Commands {
         double x = center.getX() + (2 * Math.random() - 1) * range;
         double z = center.getZ() + (2 * Math.random() - 1) * range;
         double y = getY(world, x, z);
-        entity.teleport(x, y, z);
+        entity.requestTeleport(x, y, z);
         return true;
     }
 
