@@ -32,7 +32,7 @@ public class TeleporterPlate extends PressurePlateBlock{
     public static final String MOD_NAME = "teleporter_plate";
 
     private static final Block[] validBlocks = new Block[]{
-            // tp strength of 10 blocks
+            // BASIC
             Blocks.ACACIA_WOOD,
             Blocks.BIRCH_WOOD,
             Blocks.DARK_OAK_WOOD,
@@ -46,7 +46,7 @@ public class TeleporterPlate extends PressurePlateBlock{
             Blocks.STRIPPED_OAK_WOOD,
             Blocks.STRIPPED_SPRUCE_WOOD,
 
-            // tp strength of 50 blocks
+            // WOOD
             Blocks.ACACIA_LOG,
             Blocks.BIRCH_LOG,
             Blocks.DARK_OAK_LOG,
@@ -60,27 +60,27 @@ public class TeleporterPlate extends PressurePlateBlock{
             Blocks.STRIPPED_OAK_LOG,
             Blocks.STRIPPED_SPRUCE_LOG,
 
-            // tp strength of 500 blocks
+            // IRON
             Blocks.IRON_BLOCK,
 
-            // tp strength of 2000 blocks
+            // GOLD
             Blocks.GOLD_BLOCK,
 
-            // tp strength of 5000 blocks
+            // DIAMOND
             Blocks.DIAMOND_BLOCK,
 
-            // tp strength of 12500 blocks
+            // EMERALD
             Blocks.EMERALD_BLOCK
     };
     public static final HashMap<Block, List<Integer>> blockTeleportationStrength = new HashMap<>();
     public static final HashMap<TeleportationStrengthLevel, List<Integer>> teleportationStrengthLevel = new HashMap<>();
 
     static {
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.BASIC, Lists.newArrayList(2, 5));
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.WOOD, Lists.newArrayList(10, 50));
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.LOG, Lists.newArrayList(50, 100));
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.IRON, Lists.newArrayList(100, 500));
-        teleportationStrengthLevel.put(TeleportationStrengthLevel.GOLD, Lists.newArrayList(500, 2000));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.BASIC, Lists.newArrayList(5, 15));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.WOOD, Lists.newArrayList(15, 80));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.LOG, Lists.newArrayList(80, 250));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.IRON, Lists.newArrayList(250, 800));
+        teleportationStrengthLevel.put(TeleportationStrengthLevel.GOLD, Lists.newArrayList(800, 2000));
         teleportationStrengthLevel.put(TeleportationStrengthLevel.DIAMOND, Lists.newArrayList(2000, 5000));
         teleportationStrengthLevel.put(TeleportationStrengthLevel.EMERALD, Lists.newArrayList(5000, 12500));
 
