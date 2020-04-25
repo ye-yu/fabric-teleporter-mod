@@ -15,16 +15,17 @@ Here is the feature and the future development:
 - Teleporter Plate
   - Teleporter Plate is a random tp pressure plate whose teleportation distance can be change based on the block below the plate. Teleporter Plate can be crafted with 3 Ender Pearls in the top row, and in the row right below it, 1 Blaze Powder in the left slot and 1 in the right slot, 1 Light Weighted Pressure Plate in the middle slot. 
   - There are 7 teleportation strength:
-      - BASIC: 2 to 5 blocks - place on any block that is not stated in the rest of the teleportation strength
-      - WOOD: 10 to 50 blocks - place on any wood block
-      - LOG: 50 to 100 blocks - place on any log block
-      - IRON: 100 to 500 blocks - place on an iron block
-      - GOLD: 500 to 2000 blocks - place on a gold block
+      - BASIC: 5 to 15 blocks - place on any block that is not stated in the rest of the teleportation strength
+      - WOOD: 15 to 80 blocks - place on any wood block
+      - LOG: 80 to 250 blocks - place on any log block
+      - IRON: 250 to 800 blocks - place on an iron block
+      - GOLD: 800 to 2000 blocks - place on a gold block
       - DIAMOND: 2000 to 5000 blocks - place on a diamond block
       - EMERALD: 5000 to 12500 blocks - place on an emerald block
 
 - Arrow of Teleportation
-  - Arrow of Teleportation teleports target upon the contact of the arrow. With a normal bow, the radius of teleportation is 2 to 5 blocks. _The lower and upper limit of the range increase by 5 for each Punch enchant level. This arrow cannot be crafted and must be obtained from a skeleton drop that is killed on an End Block or any derivatives of the End Block._  
+  - Arrow of Teleportation teleports target upon the contact of the arrow. 
+  With a normal bow, the radius of teleportation is 5 to 10 blocks. _The lower and upper limit of the range increase by 5 for each Punch enchant level._ This arrow cannot be crafted and must be obtained from a skeleton drop that is killed on an End Block or any derivatives of the End Block.  
 _*Italics: not yet implemented_
   
   
@@ -42,7 +43,6 @@ Just like any other Fabric mods, place the .jar file into the mods/ folder.
 - Add particles to teleporter items: v0.3.2 - graphics update
 - Change teleportation range of Teleporter Plate and AoT: v0.3.2
 - Change item graphics: v0.3.2
-- Patch Teleporter Plate layout in item frame: v0.3.2
 - Increase AoT teleportation range based on Punch enchantment on bow: v0.4 - feature update
 - Add Teleporter Wand enchantment on the enchanting table (Unbreaking): v0.4
 - Add mechanism to teleport downwards (possibly by making new enchantment?): v0.4
