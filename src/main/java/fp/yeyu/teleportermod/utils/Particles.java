@@ -12,7 +12,6 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import java.util.Objects;
 
@@ -28,9 +27,25 @@ public class Particles {
     public static PacketConsumer playParticleOnPlayer() {
         return (context, data) -> {
             final PlayerEntity player = context.getPlayer();
+            /*
+            * PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
+            * passedData.writeInt(30); // count
+            * passedData.writeInt(13548494); // color
+            * passedData.writeDouble(target.getParticleX(0.5D)); // position x
+            * passedData.writeDouble(target.getParticleZ(0.5D)); // position y
+            * */
             final int count = data.readInt();
             int color = data.readInt();
-            spawnParticlesOnEntity(color, player, count);
+            final double particleX = data.readDouble();
+            final double particleY = player.getRandomBodyY();
+            final double particleZ = data.readDouble();
+            spawnParticlesOnPosition(
+                    color,
+                    ParticleTypes.ENTITY_EFFECT,
+                    particleX,
+                    particleY,
+                    particleZ,
+                    count);
         };
     }
 
@@ -56,20 +71,7 @@ public class Particles {
         }
     }
 
-
-    public static void spawnParticlesOnEntity(Integer color, PlayerEntity player, int count) {
-        spawnParticlesOnPosition(
-                color,
-                ParticleTypes.ENTITY_EFFECT,
-                player.world,
-                player.getParticleX(0.5D),
-                player.getRandomBodyY(),
-                player.getParticleZ(0.5D),
-                count
-                );
-    }
-
-    public static void spawnParticlesOnPosition(Integer color, ParticleEffect effect, World world, double x, double y, double z, int count) {
+    public static void spawnParticlesOnPosition(Integer color, ParticleEffect effect, double x, double y, double z, int count) {
         if (Objects.isNull(color)) {
             color = 29;
         }

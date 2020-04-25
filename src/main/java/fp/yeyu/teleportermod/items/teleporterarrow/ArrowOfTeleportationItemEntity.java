@@ -6,10 +6,9 @@ import fp.yeyu.teleportermod.utils.Commands;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.fabricmc.fabric.api.server.PlayerStream;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -18,7 +17,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 
@@ -49,33 +47,22 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
     }
 
     @Override
-    protected void onHit(HitResult hitResult) {
-        super.onHit(hitResult);
-        LOGGER.info("Arrow hit on block " + hitResult.getType());
-    }
-
-    @Override
     protected void onHit(LivingEntity target) {
-        StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.GLOWING, 20, 0);
-        target.addStatusEffect(statusEffectInstance);
-        LOGGER.info("Arrow hit target " + target.getEntityName());
-        final World entityWorld = target.getEntityWorld();
         final List<Integer> integers = TeleporterPlate.teleportationStrengthLevel.get(TeleporterPlate.TeleportationStrengthLevel.BASIC);
         final int min = integers.get(0);
         final int max = integers.get(1);
-        Commands.setCommandFeedbackOutput(target, false);
-        if (!Commands.spreadPlayerSelf(world, target, min, max)) {
-            LOGGER.info(String.format("Entity %s cannot use teleportation.%n", target.getName()));
-        }
-        playParticle(target.getEntityWorld(), new ChunkPos(target.getBlockPos()));
+        Commands.rtp(world, target, min, max);
+        playParticle(target.getEntityWorld(), new ChunkPos(target.getBlockPos()), target);
     }
 
-    private void playParticle(World world, ChunkPos pos) {
+    private void playParticle(World world, ChunkPos pos, Entity target) {
         Stream<PlayerEntity> watchingPlayers = PlayerStream.watching(world,pos);
 
         PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
-        passedData.writeInt(30);
-        passedData.writeInt(13548494);
+        passedData.writeInt(30); // count
+        passedData.writeInt(13548494); // color
+        passedData.writeDouble(target.getParticleX(0.5D)); // position x
+        passedData.writeDouble(target.getParticleZ(0.5D)); // position y
 
         watchingPlayers.forEach(player ->
                 ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, TeleporterMod.AOT_PARTICLE_ID, passedData));
