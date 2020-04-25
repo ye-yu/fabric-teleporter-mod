@@ -25,6 +25,8 @@ import java.util.stream.Stream;
 
 public class ArrowOfTeleportationItemEntity extends ArrowEntity {
 
+    private static final int[] range = new int[]{5, 10};
+
     public ArrowOfTeleportationItemEntity(EntityType<? extends ArrowOfTeleportationItemEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -48,9 +50,8 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
 
     @Override
     protected void onHit(LivingEntity target) {
-        final List<Integer> integers = TeleporterPlate.teleportationStrengthLevel.get(TeleporterPlate.TeleportationStrengthLevel.BASIC);
-        final int min = integers.get(0);
-        final int max = integers.get(1);
+        final int min = range[0];
+        final int max = range[1];
         Commands.rtp(world, target, min, max);
         playParticle(target.getEntityWorld(), new ChunkPos(target.getBlockPos()), target);
     }
