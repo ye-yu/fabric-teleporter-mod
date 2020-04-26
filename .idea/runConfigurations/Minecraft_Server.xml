@@ -2,7 +2,7 @@
   <configuration default="false" name="Minecraft Server" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="net.fabricmc.devlaunchinjector.Main" />
     <module name="Teleporter_Mod.main" />
-    <option name="VM_PARAMETERS" value="-Dfabric.dli.config=F:\IntelliJ@@0020Projects\Teleporter@@0020Mod\.gradle\loom-cache\launch.cfg -Dfabric.dli.env=server -Dfabric.dli.main=net.fabricmc.loader.launch.knot.KnotServer" />
+    <option name="VM_PARAMETERS" value="-Dfabric.dli.config=&quot;$PROJECT_DIR$/.gradle/loom-cache/launch.cfg&quot; -Dfabric.dli.env=server -Dfabric.dli.main=net.fabricmc.loader.launch.knot.KnotServer -javaagent:&quot;$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.8+build.18/af077ad2845a00cde186fa2c99c4dd32bd2a2766/sponge-mixin-0.8+build.18.jar&quot;" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run/" />
     <method v="2">
       <option name="Make" enabled="true" />
