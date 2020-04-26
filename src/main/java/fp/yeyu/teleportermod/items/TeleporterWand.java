@@ -1,5 +1,8 @@
 package fp.yeyu.teleportermod.items;
 
+import fp.yeyu.teleportermod.TeleporterMod;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -10,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -65,7 +69,7 @@ public class TeleporterWand extends FishingRodItem {
         }
 
         double x = pos.getX(), y = pos.getY(), z = pos.getZ();
-        playerEntity.requestTeleport(x, y+0.5, z);
+        requestTeleport(world, playerEntity, x, y+0.5, z);
         giveEntityEffect(playerEntity, tickEffect);
         playerEntity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
 
@@ -74,6 +78,14 @@ public class TeleporterWand extends FishingRodItem {
         itemStack.damage(1, playerEntity, (p) -> p.sendToolBreakStatus(hand));
 
         return new TypedActionResult<>(ActionResult.SUCCESS, playerEntity.getStackInHand(hand));
+    }
+
+    private static void requestTeleport(World world, PlayerEntity playerEntity, double x, double y, double z) {
+        BlockPos tpPosition = new BlockPos(x, y, z);
+        PacketByteBuf data = new PacketByteBuf(Unpooled.buffer());
+        data.writeBlockPos(tpPosition);
+        if (world.isClient())
+            ClientSidePacketRegistry.INSTANCE.sendToServer(TeleporterMod.REQUEST_TP_ID, data);
     }
 
 }

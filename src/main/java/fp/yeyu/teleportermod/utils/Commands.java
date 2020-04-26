@@ -2,8 +2,6 @@ package fp.yeyu.teleportermod.utils;
 
 import fp.yeyu.teleportermod.TeleporterMod;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.entity.Entity;
@@ -21,12 +19,11 @@ public class Commands {
         double x = center.getX() + lower + (2 * Math.random() - 1) * range;
         double z = center.getZ() + lower + (2 * Math.random() - 1) * range;
         double y = getY(world, x, z);
-        entity.requestTeleport(x, y, z);
         BlockPos tpPosition = new BlockPos(x, y, z);
         PacketByteBuf data = new PacketByteBuf(Unpooled.buffer());
         data.writeBlockPos(tpPosition);
-        if (world.isClient())
-            ClientSidePacketRegistry.INSTANCE.sendToServer(TeleporterMod.REQUEST_TP_ID, data);
+        ClientSidePacketRegistry.INSTANCE.sendToServer(TeleporterMod.REQUEST_TP_ID, data);
+        System.out.printf("Requested teleportation %s to %s%n", entity, tpPosition);
     }
 
     public static int getY(BlockView blockView, double destX, double destZ) {
@@ -45,6 +42,7 @@ public class Commands {
 
     public static void teleportPacket(PacketContext context, PacketByteBuf data) {
         BlockPos pos = data.readBlockPos();
+        System.out.printf("Teleported %s to %s%n", context.getPlayer(), pos);
         context.getTaskQueue().execute(() -> context.getPlayer().teleport(pos.getX(), pos.getY(), pos.getZ()));
     }
 }
