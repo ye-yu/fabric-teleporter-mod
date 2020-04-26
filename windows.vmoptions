@@ -1,0 +1,4 @@
+-Dfabric.dli.config=F:\IntelliJ@@0020Projects\Teleporter@@0020Mod\.gradle\loom-cache\launch.cfg
+-Dfabric.dli.env=client
+-Dfabric.dli.main=net.fabricmc.loader.launch.knot.KnotClient
+-javaagent:"C:\Users\jfuds\.gradle\caches\modules-2\files-2.1\net.fabricmc\sponge-mixin\0.8+build.18\af077ad2845a00cde186fa2c99c4dd32bd2a2766\sponge-mixin-0.8+build.18.jar"
