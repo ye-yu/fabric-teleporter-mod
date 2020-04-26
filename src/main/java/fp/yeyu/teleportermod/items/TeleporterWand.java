@@ -31,7 +31,9 @@ public class TeleporterWand extends FishingRodItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand)
     {
-        if (!playerEntity.onGround) {
+        if (playerEntity.hasVehicle()) {
+            playerEntity.stopRiding();
+        } else if (!playerEntity.onGround) {
             // do nothing
             return new TypedActionResult<>(ActionResult.SUCCESS, playerEntity.getStackInHand(hand));
         }
