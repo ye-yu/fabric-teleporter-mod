@@ -151,7 +151,7 @@ public class TeleporterPlate extends PressurePlateBlock{
         if (Objects.nonNull(entities)) {
             for (Object o : entities) {
                 Entity e = (Entity) o;
-                Commands.rtp(world, e, (int) tpStrengthRange.get(0), (int) tpStrengthRange.get(1));
+                Commands.randomTeleport(world, e, (int) tpStrengthRange.get(0), (int) tpStrengthRange.get(1));
             }
         }
         playParticle(world, pos);

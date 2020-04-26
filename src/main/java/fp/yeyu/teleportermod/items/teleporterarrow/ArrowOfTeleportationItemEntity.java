@@ -53,7 +53,7 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
     protected void onHit(LivingEntity target) {
         final int min = range[0] + 5*(this.tpMultiplier - 1);
         final int max = range[1] + 5*(this.tpMultiplier - 1);
-        Commands.rtp(world, target, min, max);
+        Commands.randomTeleport(world, target, min, max);
         playParticle(target.getEntityWorld(), new ChunkPos(target.getBlockPos()), target);
     }
 

@@ -5,10 +5,12 @@ import fp.yeyu.teleportermod.entities.SkeletonEndBlockEntity;
 import fp.yeyu.teleportermod.items.TeleporterWand;
 import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItem;
 import fp.yeyu.teleportermod.items.teleporterarrow.ArrowOfTeleportationItemEntity;
+import fp.yeyu.teleportermod.utils.Commands;
 import fp.yeyu.teleportermod.utils.Particles;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.block.Material;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.entity.EntityCategory;
@@ -32,6 +34,7 @@ public class TeleporterMod implements ModInitializer {
     public static final Identifier SKELETON_END_BLOCK_ID = new Identifier(NAMESPACE, SkeletonEndBlockEntity.MOD_NAME);
     public static final Identifier AOT_PARTICLE_ID = Particles.AOT_PARTICLE_ID;
     public static final Identifier TPLATE_PARTICLE_ID = Particles.TPLATE_PARTICLE_ID;
+    public static final Identifier REQUEST_TP_ID = new Identifier(NAMESPACE, "request_tp");
 
     public static final TeleporterWand TELEPORTER_WAND = new TeleporterWand((new Item
             .Settings())
@@ -84,6 +87,9 @@ public class TeleporterMod implements ModInitializer {
 
         // registering arrow of teleportation
         Registry.register(Registry.ITEM, ARROW_OF_TELEPORTATION_ID, ARROW_OF_TELEPORTATION_ITEM);
+
+        // registering teleport request id
+        ServerSidePacketRegistry.INSTANCE.register(REQUEST_TP_ID, Commands::teleportPacket);
     }
 
 }
