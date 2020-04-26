@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Minecraft Client" type="Application" factoryName="Application">
-    <option name="ALTERNATIVE_JRE_PATH" value="C:\Program Files\AdoptOpenJDK\jdk-8.0.232.09-openj9\jre" />
+    <option name="ALTERNATIVE_JRE_PATH" value="adopt-openjdk-1.8" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="net.fabricmc.devlaunchinjector.Main" />
     <module name="Teleporter_Mod.main" />
-    <option name="VM_PARAMETERS" value="-Dfabric.dli.config=F:\IntelliJ@@0020Projects\Teleporter@@0020Mod\.gradle\loom-cache\launch.cfg -Dfabric.dli.env=client -Dfabric.dli.main=net.fabricmc.loader.launch.knot.KnotClient -javaagent:&quot;C:\Users\jfuds\.gradle\caches\modules-2\files-2.1\net.fabricmc\sponge-mixin\0.8+build.18\af077ad2845a00cde186fa2c99c4dd32bd2a2766\sponge-mixin-0.8+build.18.jar&quot;" />
+    <option name="VM_PARAMETERS" value="-Dfabric.dli.config=&quot;$PROJECT_DIR$/.gradle/loom-cache/launch.cfg&quot; -Dfabric.dli.env=client -Dfabric.dli.main=net.fabricmc.loader.launch.knot.KnotClient -javaagent:&quot;$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.8+build.18/af077ad2845a00cde186fa2c99c4dd32bd2a2766/sponge-mixin-0.8+build.18.jar&quot;" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run/" />
     <method v="2">
       <option name="Make" enabled="true" />
