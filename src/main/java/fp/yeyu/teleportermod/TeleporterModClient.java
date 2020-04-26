@@ -30,10 +30,10 @@ public class TeleporterModClient implements ClientModInitializer {
         EntityRendererRegistry.INSTANCE.register(TeleporterMod.SKELETON_END_BLOCK_ENTITY, (entityRenderDispatcher, context) -> new SkeletonEndBlockRenderer(entityRenderDispatcher));
 
         // registering particle effect for arrow of teleportation
-        ClientSidePacketRegistry.INSTANCE.register(Particles.AOT_PARTICLE_ID, Particles.playParticleOnPlayer());
+        ClientSidePacketRegistry.INSTANCE.register(Particles.AOT_PARTICLE_ID, Particles::playParticleOnPlayer);
 
         // registering particle effect for teleporter plate
-        ClientSidePacketRegistry.INSTANCE.register(Particles.TPLATE_PARTICLE_ID, Particles.playTeleporterPlateParticle());
+        ClientSidePacketRegistry.INSTANCE.register(Particles.TPLATE_PARTICLE_ID, Particles::playTeleporterPlateParticle);
     }
 
     private static void spawnEntity(PacketContext context, PacketByteBuf buffer) {
