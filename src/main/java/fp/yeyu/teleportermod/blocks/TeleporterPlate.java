@@ -2,7 +2,7 @@ package fp.yeyu.teleportermod.blocks;
 
 import com.google.common.collect.Lists;
 import fp.yeyu.teleportermod.TeleporterMod;
-import fp.yeyu.teleportermod.utils.Commands;
+import fp.yeyu.teleportermod.utils.Teleportations;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.fabricmc.fabric.api.server.PlayerStream;
@@ -151,7 +151,7 @@ public class TeleporterPlate extends PressurePlateBlock{
         if (Objects.nonNull(entities)) {
             for (Object o : entities) {
                 Entity e = (Entity) o;
-                Commands.randomTeleport(world, e, (int) tpStrengthRange.get(0), (int) tpStrengthRange.get(1));
+                Teleportations.randomTeleport(world, e, (int) tpStrengthRange.get(0), (int) tpStrengthRange.get(1));
             }
         }
         playParticle(world, pos);

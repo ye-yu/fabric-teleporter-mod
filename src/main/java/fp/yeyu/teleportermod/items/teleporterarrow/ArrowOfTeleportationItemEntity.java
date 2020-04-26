@@ -1,7 +1,7 @@
 package fp.yeyu.teleportermod.items.teleporterarrow;
 
 import fp.yeyu.teleportermod.TeleporterMod;
-import fp.yeyu.teleportermod.utils.Commands;
+import fp.yeyu.teleportermod.utils.Teleportations;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.fabricmc.fabric.api.server.PlayerStream;
@@ -53,7 +53,7 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
     protected void onHit(LivingEntity target) {
         final int min = range[0] + 5*(this.tpMultiplier - 1);
         final int max = range[1] + 5*(this.tpMultiplier - 1);
-        Commands.randomTeleport(world, target, min, max);
+        Teleportations.randomTeleport(world, target, min, max);
         playParticle(target.getEntityWorld(), new ChunkPos(target.getBlockPos()), target);
     }
 

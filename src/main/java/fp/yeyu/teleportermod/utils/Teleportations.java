@@ -11,7 +11,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class Commands {
+public class Teleportations {
 
     public static void randomTeleport(World world, Entity entity, int lower, int upper) {
         final Vec3d center = entity.getPos();
