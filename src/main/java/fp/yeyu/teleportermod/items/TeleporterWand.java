@@ -91,6 +91,6 @@ public class TeleporterWand extends Item {
 
     @Override
     public int getEnchantability() {
-        return 5;
+        return 15;
     }
 }
