@@ -2,5 +2,7 @@
   "item.teleportermod.teleporter_wand": "Teleporter Wand",
   "block.teleportermod.teleporter_plate": "Teleporter Plate",
   "item.teleportermod.arrow_of_teleportation": "Arrow of Teleportation",
-  "entity.teleportermod.skeleton": "Skeleton"
+  "entity.teleportermod.skeleton": "Skeleton",
+  "enchantment.teleportermod.ascend": "Ascend",
+  "enchantment.teleportermod.descend": "Descend"
 }

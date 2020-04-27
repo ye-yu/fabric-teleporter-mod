@@ -88,4 +88,8 @@ public class TeleporterWand extends FishingRodItem {
             ClientSidePacketRegistry.INSTANCE.sendToServer(TeleporterMod.REQUEST_TP_ID, data);
     }
 
+    @Override
+    public int getEnchantability() {
+        return 5;
+    }
 }
