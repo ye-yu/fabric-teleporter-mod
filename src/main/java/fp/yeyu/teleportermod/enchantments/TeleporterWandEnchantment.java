@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 public abstract class TeleporterWandEnchantment extends Enchantment {
 
     protected TeleporterWandEnchantment(Weight weight, EquipmentSlot[] slotTypes) {
-        super(weight, EnchantmentTarget.FISHING_ROD, slotTypes);
+        super(weight, EnchantmentTarget.ALL, slotTypes);
     }
 
     @Override
