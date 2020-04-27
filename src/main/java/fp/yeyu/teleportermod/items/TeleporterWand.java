@@ -8,7 +8,7 @@ import net.minecraft.block.Material;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FishingRodItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 import java.util.Objects;
 
-public class TeleporterWand extends FishingRodItem {
+public class TeleporterWand extends Item {
     public static final String MOD_NAME = "teleporter_wand";
 
     public TeleporterWand(Settings settings) {
@@ -32,6 +32,7 @@ public class TeleporterWand extends FishingRodItem {
         pe.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, ticks));
         pe.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, ticks));
     }
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand)
     {
