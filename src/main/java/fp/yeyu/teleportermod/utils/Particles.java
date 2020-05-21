@@ -17,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.Objects;
 
-@Environment(EnvType.CLIENT)
 public class Particles {
     public static final Identifier AOT_PARTICLE_ID = constructIdentifier(ArrowOfTeleportationItem.MOD_NAME);
     public static final Identifier TPLATE_PARTICLE_ID = constructIdentifier(TeleporterPlate.MOD_NAME);
@@ -26,6 +25,7 @@ public class Particles {
         return new Identifier(TeleporterMod.NAMESPACE, name + "_particle");
     }
 
+    @Environment(EnvType.CLIENT)
     public static void playParticleOnPlayer(PacketContext context, PacketByteBuf data) {
         final PlayerEntity player = context.getPlayer();
         /*
@@ -50,12 +50,14 @@ public class Particles {
     }
 
 
+    @Environment(EnvType.CLIENT)
     public static void playTeleporterPlateParticle(PacketContext context, PacketByteBuf data) {
         final BlockPos blockPos = data.readBlockPos();
         final int count = data.readInt();
         spawnParticleOnBlockPos(blockPos, count);
     }
 
+    @Environment(EnvType.CLIENT)
     private static void spawnParticleOnBlockPos(BlockPos blockPos, int count) {
         int color = 13548494;
         for(int k = 0; k < count; ++k) {
@@ -69,6 +71,7 @@ public class Particles {
         }
     }
 
+    @Environment(EnvType.CLIENT)
     public static void spawnParticlesOnPosition(Integer color, ParticleEffect effect, double x, double y, double z, int count) {
         if (Objects.isNull(color)) {
             color = 29;

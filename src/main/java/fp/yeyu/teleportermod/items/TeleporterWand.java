@@ -1,8 +1,6 @@
 package fp.yeyu.teleportermod.items;
 
-import fp.yeyu.teleportermod.TeleporterMod;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import fp.yeyu.teleportermod.utils.Teleportations;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
@@ -16,7 +14,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -145,11 +142,7 @@ public class TeleporterWand extends Item {
     }
 
     private static void requestTeleport(World world, PlayerEntity playerEntity, double x, double y, double z) {
-        BlockPos tpPosition = new BlockPos(x, y, z);
-        PacketByteBuf data = new PacketByteBuf(Unpooled.buffer());
-        data.writeBlockPos(tpPosition);
-        if (world.isClient())
-            ClientSidePacketRegistry.INSTANCE.sendToServer(TeleporterMod.REQUEST_TP_ID, data);
+        Teleportations.teleport(playerEntity, x, y, z);
     }
 
     @Override

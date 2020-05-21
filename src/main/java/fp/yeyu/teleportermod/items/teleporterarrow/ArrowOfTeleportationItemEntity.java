@@ -26,7 +26,7 @@ public class ArrowOfTeleportationItemEntity extends ArrowEntity {
 
     private static final int[] range = new int[]{5, 10};
     private int tpMultiplier = 1;
-    private static String PUNCH_TP_MULTIPLIER_ID = "punch_tp_multiplier";
+    private static final String PUNCH_TP_MULTIPLIER_ID = "punch_tp_multiplier";
 
     public ArrowOfTeleportationItemEntity(EntityType<? extends ArrowOfTeleportationItemEntity> entityType, World world) {
         super(entityType, world);
